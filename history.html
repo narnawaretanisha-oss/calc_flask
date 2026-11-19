@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}History | CalcSpace{% endblock %}
+
+{% block content %}
+
+<div class="content-page">
+
+    <div class="page-heading">
+
+        <div>
+
+            <p class="small-heading">
+                YOUR RECORDS
+            </p>
+
+            <h1>
+                Calculation History ♡
+            </h1>
+
+        </div>
+
+
+        {% if calculations %}
+
+        <form method="POST"
+              action="{{ url_for('clear_history') }}"
+              onsubmit="return confirm('Clear all history?');">
+
+            <button class="danger-btn">
+                Clear History
+            </button>
+
+        </form>
+
+        {% endif %}
+
+    </div>
+
+
+    {% if calculations %}
+
+    <div class="history-card">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>#</th>
+
+                    <th>Calculation</th>
+
+                    <th>Result</th>
+
+                    <th>Date & Time</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for item in calculations %}
+
+                <tr>
+
+                    <td>
+                        {{ loop.index }}
+                    </td>
+
+                    <td class="expression">
+                        {{ item["expression"] }}
+                    </td>
+
+                    <td class="result-value">
+                        {{ item["result"] }}
+                    </td>
+
+                    <td>
+                        {{ item["created_at"] }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+    {% else %}
+
+    <div class="empty-box">
+
+        <div class="empty-icon">
+            ♡
+        </div>
+
+        <h2>
+            No calculations yet
+        </h2>
+
+        <p>
+            Start calculating and your history will appear here.
+        </p>
+
+        <a href="{{ url_for('calculator') }}"
+           class="main-btn small-btn">
+            Open Calculator
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

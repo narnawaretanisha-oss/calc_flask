@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Girlie Calculator{% endblock %}</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    {% if session.get("user_id") %}
+
+    <nav class="navbar">
+
+        <div class="brand">
+            ♡ CalcSpace
+        </div>
+
+        <div class="nav-links">
+
+            <a href="{{ url_for('calculator') }}">
+                Calculator
+            </a>
+
+            <a href="{{ url_for('dashboard') }}">
+                Dashboard
+            </a>
+
+            <a href="{{ url_for('history') }}">
+                History
+            </a>
+
+            <span class="welcome-user">
+                Hi, {{ session["username"] }} ♡
+            </span>
+
+            <a class="logout-btn"
+               href="{{ url_for('logout') }}">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+    {% endif %}
+
+
+    {% with messages = get_flashed_messages() %}
+
+        {% if messages %}
+
+            <div class="flash-container">
+
+                {% for message in messages %}
+
+                    <div class="flash">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% endif %}
+
+    {% endwith %}
+
+
+    {% block content %}
+
+    {% endblock %}
+
+
+   <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>

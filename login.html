@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Login | CalcSpace{% endblock %}
+
+{% block content %}
+
+<div class="auth-page">
+
+    <div class="auth-card">
+
+        <div class="auth-icon">
+            ♡
+        </div>
+
+        <h1>Welcome Back</h1>
+
+        <p class="auth-subtitle">
+            Login to continue your calculations
+        </p>
+
+
+        <form method="POST">
+
+            <label>Username</label>
+
+            <input
+                type="text"
+                name="username"
+                placeholder="Enter username"
+                required
+            >
+
+
+            <label>Password</label>
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Enter password"
+                required
+            >
+
+
+            <button class="main-btn" type="submit">
+                Login
+            </button>
+
+        </form>
+
+
+        <p class="auth-bottom">
+
+            Don't have an account?
+
+            <a href="{{ url_for('signup') }}">
+                Create Account
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}
